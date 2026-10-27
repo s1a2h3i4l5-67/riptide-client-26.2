@@ -1,0 +1,22 @@
+# Build outputs
+build/
+*/build/
+.gradle/
+out/
+bin/
+
+# Node
+node_modules/
+
+# Decompiler reference dump (regenerated; not needed to build)
+source/
+
+# Logs & temp
+*.log
+*.tmp
+
+# OS / IDE
+.DS_Store
+.idea/
+*.iml
+.vscode/
