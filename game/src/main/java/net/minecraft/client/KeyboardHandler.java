@@ -506,6 +506,9 @@ public class KeyboardHandler {
             boolean handlesGlobalInput = handlesGameInput
                || this.minecraft.gui.screen() instanceof PauseScreen pauseScreen && !pauseScreen.showsPauseMenu()
                || this.minecraft.gui.screen() instanceof GameModeSwitcherScreen;
+            if (handlesGameInput && action == 1 && net.riptide.Hooks.onKeyPress(event.key())) {
+               return;
+            }
             if (modifierAndOverlayIsSame && options.keyDebugModifier.matches(event) && action == 0) {
                if (this.usedDebugKeyAsModifier) {
                   this.usedDebugKeyAsModifier = false;

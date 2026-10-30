@@ -19,6 +19,11 @@ public class ModuleManager {
         for (Module m : modules) if (m.getName().equalsIgnoreCase(name)) return m;
         return null;
     }
+    @SuppressWarnings("unchecked")
+    public <T extends Module> T get(Class<T> type) {
+        for (Module m : modules) if (m.getClass() == type) return (T) m;
+        return null;
+    }
     public List<Module> getEnabled() {
         List<Module> l = new ArrayList<Module>();
         for (Module m : modules) if (m.isEnabled()) l.add(m);
@@ -41,8 +46,14 @@ public class ModuleManager {
             try { m.onRender2D(g); } catch (Throwable t) { t.printStackTrace(); }
         }
     }
-    public void onKey(int key) {
-        if (key == -1) return;
-        for (Module m : modules) if (m.getKeyCode() == key) m.toggle();
+    /** Toggles every module bound to this key. Returns true if any was bound. */
+    public boolean onKey(int key) {
+        if (key == -1) return false;
+        boolean hit = false;
+        for (Module m : modules) if (m.getKeyCode() == key) {
+            m.toggle();
+            hit = true;
+        }
+        return hit;
     }
 }

@@ -48,4 +48,16 @@ public abstract class Module {
     public void onRender2D(net.minecraft.client.gui.GuiGraphicsExtractor g) {}
 
     protected Minecraft mc() { return Minecraft.getInstance(); }
+
+    /** True when there is a player in a world (safe to touch mc().player / mc().level). */
+    protected boolean inGame() {
+        Minecraft mc = mc();
+        return mc.player != null && mc.level != null && mc.gameMode != null;
+    }
+
+    /** Extra text shown next to the name in the HUD list, e.g. the current mode. */
+    public String getSuffix() { return null; }
+
+    /** Hidden modules are left out of the HUD module list. */
+    public boolean isHidden() { return false; }
 }

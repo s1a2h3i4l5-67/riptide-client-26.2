@@ -327,7 +327,7 @@ public class Minecraft extends ReentrantBlockableEventLoop<Runnable> implements 
    private boolean isLocalServer;
    public @Nullable Entity crosshairPickEntity;
    public @Nullable HitResult hitResult;
-   private int rightClickDelay;
+   public int rightClickDelay; // Riptide: public for FastPlace
    protected int missTime;
    private volatile boolean pause;
    private long lastNanoTime = Util.getNanos();
@@ -3140,6 +3140,7 @@ public class Minecraft extends ReentrantBlockableEventLoop<Runnable> implements 
 
    public boolean shouldEntityAppearGlowing(final Entity entity) {
       return entity.isCurrentlyGlowing()
+         || net.riptide.Hooks.shouldGlow(entity)
          || this.player != null && this.player.isSpectator() && this.options.keySpectatorOutlines.isDown() && entity.is(EntityTypes.PLAYER);
    }
 

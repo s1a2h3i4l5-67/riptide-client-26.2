@@ -238,7 +238,7 @@ public abstract class EntityRenderer<T extends Entity, S extends EntityRenderSta
       state.displayFireAnimation = entity.displayFireAnimation();
       Minecraft minecraft = Minecraft.getInstance();
       boolean appearsGlowing = minecraft.shouldEntityAppearGlowing(entity);
-      state.outlineColor = appearsGlowing ? ARGB.opaque(entity.getTeamColor()) : 0;
+      state.outlineColor = appearsGlowing ? ARGB.opaque(net.riptide.Hooks.outlineColor(entity, entity.getTeamColor())) : 0;
       state.lightCoords = this.getPackedLightCoords(entity, partialTicks);
    }
 

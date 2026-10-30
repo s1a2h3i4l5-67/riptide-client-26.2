@@ -65,7 +65,7 @@ public class LightmapRenderStateExtractor {
             }
 
             renderState.ambientColor = ARGB.vector3fFromRGB24(camera.attributeProbe().getValue(EnvironmentAttributes.AMBIENT_LIGHT_COLOR, partialTicks));
-            float brightnessOption = this.minecraft.options.gamma().get().floatValue();
+            float brightnessOption = net.riptide.Hooks.brightness(this.minecraft.options.gamma().get().floatValue());
             float darknessEffectScaleOption = this.minecraft.options.darknessEffectScale().get().floatValue();
             float darknessEffectBrightnessModifier = player.getEffectBlendFactor(MobEffects.DARKNESS, partialTicks) * darknessEffectScaleOption;
             renderState.brightness = Math.max(0.0F, brightnessOption - darknessEffectBrightnessModifier);

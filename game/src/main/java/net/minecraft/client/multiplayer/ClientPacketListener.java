@@ -657,7 +657,7 @@ public class ClientPacketListener extends ClientCommonPacketListenerImpl impleme
       PacketUtils.ensureRunningOnSameThread(packet, this, this.minecraft.packetProcessor());
       Entity entity = this.level.getEntity(packet.id());
       if (entity != null) {
-         entity.lerpMotion(packet.movement());
+         entity.lerpMotion(net.riptide.Hooks.entityMotion(entity, packet.movement()));
       }
    }
 
@@ -1448,7 +1448,7 @@ public class ClientPacketListener extends ClientCommonPacketListenerImpl impleme
          );
       this.minecraft.level.addParticle(packet.explosionParticle(), center.x(), center.y(), center.z(), 1.0, 0.0, 0.0);
       this.minecraft.level.trackExplosionEffects(center, packet.radius(), packet.blockCount(), packet.blockParticles());
-      packet.playerKnockback().ifPresent(this.minecraft.player::addDeltaMovement);
+      packet.playerKnockback().map(net.riptide.Hooks::explosionKnockback).ifPresent(this.minecraft.player::addDeltaMovement);
    }
 
    @Override

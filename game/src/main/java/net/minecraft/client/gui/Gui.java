@@ -151,6 +151,9 @@ public class Gui {
       if (shouldRenderLevel) {
          profiler.push("hud");
          this.hud.extractRenderState(graphics, deltaTracker);
+         if (!this.hud.isHidden()) {
+            net.riptide.Hooks.onRender2D(graphics);
+         }
          profiler.pop();
       }
 
